@@ -1,0 +1,9 @@
+.\obj\jpegcodec.o: ..\..\..\Driver\Source\jpegcodec.c
+.\obj\jpegcodec.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\jpegcodec.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\obj\jpegcodec.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\obj\jpegcodec.o: ..\..\..\Driver\Include\N9H30.h
+.\obj\jpegcodec.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\jpegcodec.o: ..\..\..\Driver\Include\sys.h
+.\obj\jpegcodec.o: ..\..\..\Driver\Include\jpegcodec.h
+.\obj\jpegcodec.o: ..\..\..\Driver\Include\jpeg.h

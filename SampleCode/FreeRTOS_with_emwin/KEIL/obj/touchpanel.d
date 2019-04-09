@@ -1,0 +1,14 @@
+.\obj\touchpanel.o: ..\tslib\TouchPanel.c
+.\obj\touchpanel.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\obj\touchpanel.o: ..\..\..\Driver\Include\N9H30.h
+.\obj\touchpanel.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\touchpanel.o: ..\..\..\Driver\Include\adc.h
+.\obj\touchpanel.o: ..\tslib\TouchPanel.h
+.\obj\touchpanel.o: ..\..\..\ThirdParty\emWin\Include\GUI.h
+.\obj\touchpanel.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\touchpanel.o: ..\..\..\ThirdParty\emWin\Include\GUI_ConfDefaults.h
+.\obj\touchpanel.o: ..\..\..\ThirdParty\emWin\Config\GUIConf.h
+.\obj\touchpanel.o: ..\..\..\ThirdParty\emWin\Include\GUI_Type.h
+.\obj\touchpanel.o: ..\..\..\ThirdParty\emWin\Include\LCD.h
+.\obj\touchpanel.o: ..\..\..\ThirdParty\emWin\Include\Global.h
+.\obj\touchpanel.o: ..\..\..\ThirdParty\emWin\Include\GUI_Version.h

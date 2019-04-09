@@ -27,7 +27,7 @@
 ;;;105        //DATA pin
 ;;;106        //GPA0 ~ GPA7 (DATA0~7)
 ;;;107        outpw(REG_SYS_GPA_MFPL, 0x22222222);
-000028  e59f1074          LDR      r1,|L1.164|
+000028  e59f1088          LDR      r1,|L1.184|
 00002c  e5801070          STR      r1,[r0,#0x70]
 ;;;108        //GPA8 ~ GPA15 (DATA8~15)
 ;;;109        outpw(REG_SYS_GPA_MFPH, 0x22222222);
@@ -86,619 +86,605 @@
 ;;;144        // Note: before get pointer of frame buffer, must set display color depth first
 ;;;145        g_VAFrameBuf = vpostGetFrameBuffer();
 000078  ebfffffe          BL       vpostGetFrameBuffer
-00007c  e59f1024          LDR      r1,|L1.168|
+00007c  e59f1038          LDR      r1,|L1.188|
 ;;;146        if(g_VAFrameBuf == NULL)
 000080  e3500000          CMP      r0,#0
 000084  e5810018          STR      r0,[r1,#0x18]         ;145  ; g_VAFrameBuf
-000088  0a000002          BEQ      |L1.152|
+000088  0a000004          BEQ      |L1.160|
 ;;;147        {
 ;;;148            sysprintf("Get buffer error !!\n");
 ;;;149            while(1);
 ;;;150        }
 ;;;151    
-;;;152    #ifdef _PANEL_E50A2V1_16BPP_
-;;;153        memset((void *)g_VAFrameBuf, 0, LCD_XSIZE*LCD_YSIZE*2);
-00008c  e8bd4008          POP      {r3,lr}
-000090  e59f1014          LDR      r1,|L1.172|
-000094  eafffffe          B        __aeabi_memclr
-                  |L1.152|
-000098  e28f0010          ADR      r0,|L1.176|
-00009c  ebfffffe          BL       sysprintf
+;;;152        if((UINT32)g_VAFrameBuf == BIT31)
+00008c  e3500102          CMP      r0,#0x80000000
+000090  0a000005          BEQ      |L1.172|
+;;;153        {
+;;;154            sysprintf("Get buffer error !!\n");
+;;;155            while(1);
+;;;156        }
+;;;157    
+;;;158    #ifdef _PANEL_E50A2V1_16BPP_
+;;;159        memset((void *)g_VAFrameBuf, 0, LCD_XSIZE*LCD_YSIZE*2);
+000094  e8bd4008          POP      {r3,lr}
+000098  e59f1020          LDR      r1,|L1.192|
+00009c  eafffffe          B        __aeabi_memclr
                   |L1.160|
-0000a0  eafffffe          B        |L1.160|
-;;;154    #endif
-;;;155    #ifdef _PANEL_FW070TFT_24BPP_
-;;;156        memset((void *)g_VAFrameBuf, 0, LCD_XSIZE*LCD_YSIZE*4);
-;;;157    #endif
-;;;158    
-;;;159        // Start video
-;;;160        //vpostVAStartTrigger();
-;;;161    }
-;;;162    
+0000a0  e28f001c          ADR      r0,|L1.196|
+0000a4  ebfffffe          BL       sysprintf
+                  |L1.168|
+0000a8  eafffffe          B        |L1.168|
+                  |L1.172|
+0000ac  e28f0010          ADR      r0,|L1.196|
+0000b0  ebfffffe          BL       sysprintf
+                  |L1.180|
+0000b4  eafffffe          B        |L1.180|
+;;;160    #endif
+;;;161    #ifdef _PANEL_FW070TFT_24BPP_
+;;;162        memset((void *)g_VAFrameBuf, 0, LCD_XSIZE*LCD_YSIZE*4);
+;;;163    #endif
+;;;164    
+;;;165        // Start video
+;;;166        //vpostVAStartTrigger();
+;;;167    }
+;;;168    
                           ENDP
 
-                  |L1.164|
+                  |L1.184|
                           DCD      0x22222222
-                  |L1.168|
+                  |L1.188|
                           DCD      ||.data||
-                  |L1.172|
+                  |L1.192|
                           DCD      0x000bb800
-                  |L1.176|
-0000b0  47657420          DCB      "Get buffer error !!\n",0
-0000b4  62756666
-0000b8  65722065
-0000bc  72726f72
-0000c0  2021210a
-0000c4  00      
-0000c5  00                DCB      0
-0000c6  00                DCB      0
-0000c7  00                DCB      0
+                  |L1.196|
+0000c4  47657420          DCB      "Get buffer error !!\n",0
+0000c8  62756666
+0000cc  65722065
+0000d0  72726f72
+0000d4  2021210a
+0000d8  00      
+0000d9  00                DCB      0
+0000da  00                DCB      0
+0000db  00                DCB      0
 
                           AREA ||i.MainTask||, CODE, READONLY, ALIGN=2
 
                   MainTask PROC
-;;;381    WM_HWIN CreateFramewin(void);
-;;;382    void MainTask(void)
+;;;387    WM_HWIN CreateFramewin(void);
+;;;388    void MainTask(void)
 000000  e24dd028          SUB      sp,sp,#0x28
-;;;383    {
-;;;384        WM_HWIN hWin;
-;;;385        char     acVersion[40] = "Framewin: Version of emWin: ";
-000004  e59f1034          LDR      r1,|L2.64|
+;;;389    {
+;;;390        WM_HWIN hWin;
+;;;391        char     acVersion[40] = "Framewin: Version of emWin: ";
+000004  e59f103c          LDR      r1,|L2.72|
 000008  e3a02028          MOV      r2,#0x28
 00000c  e1a0000d          MOV      r0,sp
 000010  ebfffffe          BL       __aeabi_memcpy4
-;;;386    	static uint32_t cnt = 0;
-;;;387    
-;;;388    //    GUI_Init();
-;;;389        hWin = CreateFramewin();
-000014  ebfffffe          BL       CreateFramewin
-000018  e1a04000          MOV      r4,r0
-;;;390        strcat(acVersion, GUI_GetVersionString());
-00001c  ebfffffe          BL       GUI_GetVersionString
-000020  e1a01000          MOV      r1,r0
-000024  e1a0000d          MOV      r0,sp
-000028  ebfffffe          BL       strcat
-;;;391        FRAMEWIN_SetText(hWin, acVersion);
-00002c  e1a0100d          MOV      r1,sp
-000030  e1a00004          MOV      r0,r4
-000034  ebfffffe          BL       FRAMEWIN_SetText
-                  |L2.56|
-;;;392    
-;;;393        while (1)
-;;;394        {
-;;;395    		//Below API both work
-;;;396    //        GUI_Delay(500);
-;;;397    		GUI_Exec();
-000038  ebfffffe          BL       GUI_Exec
-00003c  eafffffd          B        |L2.56|
+;;;392    //	static uint32_t cnt = 0;
+;;;393    
+;;;394        GUI_Init();
+000014  ebfffffe          BL       GUI_Init
+;;;395        hWin = CreateFramewin();
+000018  ebfffffe          BL       CreateFramewin
+00001c  e1a04000          MOV      r4,r0
+;;;396        strcat(acVersion, GUI_GetVersionString());
+000020  ebfffffe          BL       GUI_GetVersionString
+000024  e1a01000          MOV      r1,r0
+000028  e1a0000d          MOV      r0,sp
+00002c  ebfffffe          BL       strcat
+;;;397        FRAMEWIN_SetText(hWin, acVersion);
+000030  e1a0100d          MOV      r1,sp
+000034  e1a00004          MOV      r0,r4
+000038  ebfffffe          BL       FRAMEWIN_SetText
+                  |L2.60|
 ;;;398    
-;;;399    //		sysprintf("MainTask:%d (%4d)\r\n" ,eTaskGetState(xTaskemWinHandle),cnt++);
-;;;400    
-;;;401        }
-;;;402    }
-;;;403    
+;;;399        while (1)
+;;;400        {
+;;;401    		//Below API both work
+;;;402            GUI_Delay(100);
+00003c  e3a00064          MOV      r0,#0x64
+000040  ebfffffe          BL       GUI_Delay
+000044  eafffffc          B        |L2.60|
+;;;403    //		GUI_Exec();
+;;;404    
+;;;405    //		sysprintf("MainTask:%d (%4d)\r\n" ,eTaskGetState(xTaskemWinHandle),cnt++);
+;;;406    
+;;;407        }
+;;;408    }
+;;;409    
                           ENDP
 
-                  |L2.64|
+                  |L2.72|
                           DCD      ||.constdata||
 
                           AREA ||i.SYS_Init||, CODE, READONLY, ALIGN=2
 
                   SYS_Init PROC
-;;;301    
-;;;302    void SYS_Init(void)
-000000  e12fff1e          BX       lr
-;;;303    {
-;;;304    #ifdef __USE_SD__
-;;;305        /* enable SDH */
-;;;306        outpw(REG_CLK_HCLKEN, inpw(REG_CLK_HCLKEN) | 0x40000000);
 ;;;307    
-;;;308        /* select multi-function-pin */
-;;;309        /* SD Port 0 -> PD0~7 */
-;;;310        outpw(REG_SYS_GPD_MFPL, 0x66666666);
-;;;311        SD_Drv = 0;
-;;;312    #endif
+;;;308    void SYS_Init(void)
+000000  e12fff1e          BX       lr
+;;;309    {
+;;;310    #ifdef __USE_SD__
+;;;311        /* enable SDH */
+;;;312        outpw(REG_CLK_HCLKEN, inpw(REG_CLK_HCLKEN) | 0x40000000);
 ;;;313    
-;;;314    #if 0 // port 1
-;;;315        /* initial SD1 pin -> PI5~10, 12~13 */
-;;;316        outpw(REG_SYS_GPI_MFPL, inpw(REG_SYS_GPI_MFPL) & ~0xfff00000 | 0x44400000);
-;;;317        outpw(REG_SYS_GPI_MFPH, inpw(REG_SYS_GPI_MFPH) & ~0x00ff0fff | 0x00440444);
-;;;318        SD_Drv = 1;
-;;;319    #endif
-;;;320    
-;;;321    }
-;;;322    
+;;;314        /* select multi-function-pin */
+;;;315        /* SD Port 0 -> PD0~7 */
+;;;316        outpw(REG_SYS_GPD_MFPL, 0x66666666);
+;;;317        SD_Drv = 0;
+;;;318    #endif
+;;;319    
+;;;320    #if 0 // port 1
+;;;321        /* initial SD1 pin -> PI5~10, 12~13 */
+;;;322        outpw(REG_SYS_GPI_MFPL, inpw(REG_SYS_GPI_MFPL) & ~0xfff00000 | 0x44400000);
+;;;323        outpw(REG_SYS_GPI_MFPH, inpw(REG_SYS_GPI_MFPH) & ~0x00ff0fff | 0x00440444);
+;;;324        SD_Drv = 1;
+;;;325    #endif
+;;;326    
+;;;327    }
+;;;328    
                           ENDP
 
-
-                          AREA ||i.TMR0_IRQHandler||, CODE, READONLY, ALIGN=2
-
-                  TMR0_IRQHandler PROC
-;;;165    
-;;;166    void TMR0_IRQHandler(void)
-000000  e59f000c          LDR      r0,|L4.20|
-;;;167    {
-;;;168        OS_TimeMS++;
-000004  e5901000          LDR      r1,[r0,#0]  ; OS_TimeMS
-000008  e2811001          ADD      r1,r1,#1
-00000c  e5801000          STR      r1,[r0,#0]  ; OS_TimeMS
-;;;169    }
-000010  e12fff1e          BX       lr
-;;;170    
-                          ENDP
-
-                  |L4.20|
-                          DCD      OS_TimeMS
 
                           AREA ||i.TMR0_IRQHandler_TouchTask||, CODE, READONLY, ALIGN=2
 
                   TMR0_IRQHandler_TouchTask PROC
-;;;170    
-;;;171    void TMR0_IRQHandler_TouchTask(void)
-000000  e59f000c          LDR      r0,|L5.20|
-;;;172    {
-;;;173        //sysprintf("g_enable_Touch=%d\n", g_enable_Touch);
-;;;174        if ( g_enable_Touch == 1 )
+;;;176    
+;;;177    void TMR0_IRQHandler_TouchTask(void)
+000000  e59f000c          LDR      r0,|L4.20|
+;;;178    {
+;;;179        //sysprintf("g_enable_Touch=%d\n", g_enable_Touch);
+;;;180        if ( g_enable_Touch == 1 )
 000004  e5900020          LDR      r0,[r0,#0x20]  ; g_enable_Touch
 000008  e3500001          CMP      r0,#1
-;;;175        {
-;;;176            //sysprintf("enable_Touch=%d\n", g_enable_Touch);
-;;;177            TouchTask();
-;;;178        }
-;;;179    }
+;;;181        {
+;;;182            //sysprintf("enable_Touch=%d\n", g_enable_Touch);
+;;;183            TouchTask();
+;;;184        }
+;;;185    }
 00000c  112fff1e          BXNE     lr
 000010  eafffffe          B        TouchTask
-;;;180    
+;;;186    
                           ENDP
 
-                  |L5.20|
+                  |L4.20|
                           DCD      ||.data||
 
                           AREA ||i.main||, CODE, READONLY, ALIGN=2
 
                   main PROC
-;;;539    
-;;;540    int main(void)
+;;;545    
+;;;546    int main(void)
 000000  e92d401c          PUSH     {r2-r4,lr}
-;;;541    {
-;;;542    	prvSetupHardware();
+;;;547    {
+;;;548    	prvSetupHardware();
 000004  ebfffffe          BL       prvSetupHardware
-;;;543    
-;;;544        xTaskCreate( vTaskemWin, "emWin", configMINIMAL_STACK_SIZE*32 , NULL, setMEDIUM_PRIORITY, &xTaskemWinHandle );
-000008  e59f0084          LDR      r0,|L6.148|
+;;;549    
+;;;550        xTaskCreate( vTaskemWin, "emWin", configMINIMAL_STACK_SIZE*8 , NULL, setMEDIUM_PRIORITY, &xTaskemWinHandle );
+000008  e59f0084          LDR      r0,|L5.148|
 00000c  e3a04002          MOV      r4,#2
 000010  e58d0004          STR      r0,[sp,#4]
-000014  e59f0084          LDR      r0,|L6.160|
+000014  e59f0084          LDR      r0,|L5.160|
 000018  e3a03000          MOV      r3,#0
 00001c  e3a02a02          MOV      r2,#0x2000
-000020  e28f1070          ADR      r1,|L6.152|
+000020  e28f1070          ADR      r1,|L5.152|
 000024  e58d4000          STR      r4,[sp,#0]
 000028  ebfffffe          BL       xTaskCreate
-;;;545        xTaskCreate( vTaskLogMsg1s, "LogMsg1s", configMINIMAL_STACK_SIZE , NULL, setMEDIUM_PRIORITY, &xTaskLogMsg1sHandle );
-00002c  e59f0070          LDR      r0,|L6.164|
+;;;551        xTaskCreate( vTaskLogMsg1s, "LogMsg1s", configMINIMAL_STACK_SIZE , NULL, setMEDIUM_PRIORITY, &xTaskLogMsg1sHandle );
+00002c  e59f0070          LDR      r0,|L5.164|
 000030  e3a03000          MOV      r3,#0
 000034  e58d0004          STR      r0,[sp,#4]
-000038  e59f0074          LDR      r0,|L6.180|
-00003c  e3a02c01          MOV      r2,#0x100
-000040  e28f1060          ADR      r1,|L6.168|
+000038  e59f0074          LDR      r0,|L5.180|
+00003c  e3a02b01          MOV      r2,#0x400
+000040  e28f1060          ADR      r1,|L5.168|
 000044  e58d4000          STR      r4,[sp,#0]
 000048  ebfffffe          BL       xTaskCreate
-;;;546        xTaskCreate( vTaskLogMsg5s, "LogMsg5s", configMINIMAL_STACK_SIZE , NULL, setMEDIUM_PRIORITY, &xTaskLogMsg5sHandle );
-00004c  e59f0064          LDR      r0,|L6.184|
+;;;552        xTaskCreate( vTaskLogMsg5s, "LogMsg5s", configMINIMAL_STACK_SIZE , NULL, setMEDIUM_PRIORITY, &xTaskLogMsg5sHandle );
+00004c  e59f0064          LDR      r0,|L5.184|
 000050  e3a03000          MOV      r3,#0
 000054  e58d0004          STR      r0,[sp,#4]
-000058  e59f0068          LDR      r0,|L6.200|
-00005c  e3a02c01          MOV      r2,#0x100
-000060  e28f1054          ADR      r1,|L6.188|
+000058  e59f0068          LDR      r0,|L5.200|
+00005c  e3a02b01          MOV      r2,#0x400
+000060  e28f1054          ADR      r1,|L5.188|
 000064  e58d4000          STR      r4,[sp,#0]
 000068  ebfffffe          BL       xTaskCreate
-;;;547        xTaskCreate( vTaskLogMsg500ms, "LogMsg500ms", configMINIMAL_STACK_SIZE , NULL, setMEDIUM_PRIORITY, NULL );
+;;;553        xTaskCreate( vTaskLogMsg500ms, "LogMsg500ms", configMINIMAL_STACK_SIZE , NULL, setMEDIUM_PRIORITY, NULL );
 00006c  e3a00000          MOV      r0,#0
 000070  e1a03000          MOV      r3,r0
 000074  e58d0004          STR      r0,[sp,#4]
-000078  e59f0058          LDR      r0,|L6.216|
-00007c  e3a02c01          MOV      r2,#0x100
-000080  e28f1044          ADR      r1,|L6.204|
+000078  e59f0058          LDR      r0,|L5.216|
+00007c  e3a02b01          MOV      r2,#0x400
+000080  e28f1044          ADR      r1,|L5.204|
 000084  e58d4000          STR      r4,[sp,#0]
 000088  ebfffffe          BL       xTaskCreate
-;;;548    	
-;;;549        vTaskStartScheduler();
+;;;554    	
+;;;555        vTaskStartScheduler();
 00008c  ebfffffe          BL       vTaskStartScheduler
-                  |L6.144|
-;;;550    
-;;;551        for( ;; );
-000090  eafffffe          B        |L6.144|
-;;;552    	
-;;;553    //    return 0;
-;;;554    }
+                  |L5.144|
+;;;556    
+;;;557        for( ;; );
+000090  eafffffe          B        |L5.144|
+;;;558    	
+;;;559    //    return 0;
+;;;560    }
                           ENDP
 
-                  |L6.148|
+                  |L5.148|
                           DCD      ||.data||+0xc
-                  |L6.152|
+                  |L5.152|
 000098  656d5769          DCB      "emWin",0
 00009c  6e00    
 00009e  00                DCB      0
 00009f  00                DCB      0
-                  |L6.160|
+                  |L5.160|
                           DCD      vTaskemWin
-                  |L6.164|
+                  |L5.164|
                           DCD      ||.data||+0x10
-                  |L6.168|
+                  |L5.168|
 0000a8  4c6f674d          DCB      "LogMsg1s",0
 0000ac  73673173
 0000b0  00      
 0000b1  00                DCB      0
 0000b2  00                DCB      0
 0000b3  00                DCB      0
-                  |L6.180|
+                  |L5.180|
                           DCD      vTaskLogMsg1s
-                  |L6.184|
+                  |L5.184|
                           DCD      ||.data||+0x14
-                  |L6.188|
+                  |L5.188|
 0000bc  4c6f674d          DCB      "LogMsg5s",0
 0000c0  73673573
 0000c4  00      
 0000c5  00                DCB      0
 0000c6  00                DCB      0
 0000c7  00                DCB      0
-                  |L6.200|
+                  |L5.200|
                           DCD      vTaskLogMsg5s
-                  |L6.204|
+                  |L5.204|
 0000cc  4c6f674d          DCB      "LogMsg500ms",0
 0000d0  73673530
 0000d4  306d7300
-                  |L6.216|
+                  |L5.216|
                           DCD      vTaskLogMsg500ms
 
                           AREA ||i.prvSetupHardware||, CODE, READONLY, ALIGN=2
 
                   prvSetupHardware PROC
-;;;404    
-;;;405    void prvSetupHardware( void )
-000000  e59f014c          LDR      r0,|L7.340|
-;;;406    {
+;;;410    
+;;;411    void prvSetupHardware( void )
+000000  e59f0134          LDR      r0,|L6.316|
+;;;412    {
 000004  e92d4010          PUSH     {r4,lr}
-;;;407        /* Perform the hardware setup required.  This is minimal as most of the
-;;;408        setup is managed by the settings in the project file. */
-;;;409    
-;;;410    #ifdef __USE_SD__
-;;;411        FRESULT     res;
-;;;412    #else
-;;;413        uint16_t u16ID;
-;;;414    #endif
+;;;413        /* Perform the hardware setup required.  This is minimal as most of the
+;;;414        setup is managed by the settings in the project file. */
 ;;;415    
-;;;416        *((volatile unsigned int *)REG_AIC_MDCR)=0xFFFFFFFF;  // disable all interrupt channel
+;;;416    #ifdef __USE_SD__
+;;;417        FRESULT     res;
+;;;418    #else
+;;;419        uint16_t u16ID;
+;;;420    #endif
+;;;421    
+;;;422        *((volatile unsigned int *)REG_AIC_MDCR)=0xFFFFFFFF;  // disable all interrupt channel
 000008  e3e01000          MVN      r1,#0
 00000c  e5801138          STR      r1,[r0,#0x138]
-;;;417        *((volatile unsigned int *)REG_AIC_MDCRH)=0xFFFFFFFF;  // disable all interrupt channel
+;;;423        *((volatile unsigned int *)REG_AIC_MDCRH)=0xFFFFFFFF;  // disable all interrupt channel
 000010  e580113c          STR      r1,[r0,#0x13c]
-;;;418        *(volatile unsigned int *)(CLK_BA+0x18) |= (1<<16); /* Enable UART0 */
+;;;424        *(volatile unsigned int *)(CLK_BA+0x18) |= (1<<16); /* Enable UART0 */
 000014  e3a0020b          MOV      r0,#0xb0000000
 000018  e5901218          LDR      r1,[r0,#0x218]
 00001c  e3811801          ORR      r1,r1,#0x10000
 000020  e5801218          STR      r1,[r0,#0x218]
-;;;419        *(volatile unsigned int *)(CLK_BA+0x18) |= (1<<3); /* Enable GPIO */
+;;;425        *(volatile unsigned int *)(CLK_BA+0x18) |= (1<<3); /* Enable GPIO */
 000024  e5901218          LDR      r1,[r0,#0x218]
 000028  e3811008          ORR      r1,r1,#8
 00002c  e5801218          STR      r1,[r0,#0x218]
-;;;420        sysDisableCache();
+;;;426        sysDisableCache();
 000030  ebfffffe          BL       sysDisableCache
-;;;421        sysFlushCache(I_D_CACHE);
+;;;427        sysFlushCache(I_D_CACHE);
 000034  e3a00008          MOV      r0,#8
 000038  ebfffffe          BL       sysFlushCache
-;;;422        sysEnableCache(CACHE_WRITE_BACK);
+;;;428        sysEnableCache(CACHE_WRITE_BACK);
 00003c  e3a00000          MOV      r0,#0
 000040  ebfffffe          BL       sysEnableCache
-;;;423        sysInitializeUART();
+;;;429        sysInitializeUART();
 000044  ebfffffe          BL       sysInitializeUART
-;;;424    
-;;;425    #ifdef GUI_SUPPORT_TOUCH
-;;;426        g_enable_Touch = 0;
-000048  e59f4108          LDR      r4,|L7.344|
+;;;430    
+;;;431    #ifdef GUI_SUPPORT_TOUCH
+;;;432        g_enable_Touch = 0;
+000048  e59f40f0          LDR      r4,|L6.320|
 00004c  e3a00000          MOV      r0,#0
 000050  e5840020          STR      r0,[r4,#0x20]  ; g_enable_Touch
-;;;427    #endif
-;;;428    
-;;;429        OS_TimeMS = 0;
-000054  e59f1100          LDR      r1,|L7.348|
-000058  e5810000          STR      r0,[r1,#0]  ; OS_TimeMS
-;;;430    
-;;;431        SYS_Init();
-;;;432    
-;;;433        sysSetTimerReferenceClock(TIMER0, 12000000);
-00005c  e59f10fc          LDR      r1,|L7.352|
-000060  ebfffffe          BL       sysSetTimerReferenceClock
-;;;434        sysStartTimer(TIMER0, 1000, PERIODIC_MODE);         /* 1000 ticks/per sec ==> 1tick/1ms */
-000064  e3a02001          MOV      r2,#1
-000068  e3a01ffa          MOV      r1,#0x3e8
-00006c  e3a00000          MOV      r0,#0
-000070  ebfffffe          BL       sysStartTimer
-;;;435        sysSetTimerEvent(TIMER0,  1, (PVOID)TMR0_IRQHandler);           /*  1 tick  per call back */
-000074  e59f20e8          LDR      r2,|L7.356|
-000078  e3a01001          MOV      r1,#1
-00007c  e3a00000          MOV      r0,#0
-000080  ebfffffe          BL       sysSetTimerEvent
-;;;436        sysSetTimerEvent(TIMER0, 10, (PVOID)TMR0_IRQHandler_TouchTask); /* 10 ticks per call back */
-000084  e59f20dc          LDR      r2,|L7.360|
-000088  e3a0100a          MOV      r1,#0xa
-00008c  e3a00000          MOV      r0,#0
-000090  ebfffffe          BL       sysSetTimerEvent
-;;;437    
-;;;438    #ifdef __USE_SD__
-;;;439        sysInstallISR(HIGH_LEVEL_SENSITIVE|IRQ_LEVEL_1, SDH_IRQn, (PVOID)SDH_IRQHandler);
-;;;440        sysEnableInterrupt(SDH_IRQn);
-;;;441    #endif
-;;;442    
-;;;443        sysSetLocalInterrupt(ENABLE_IRQ);
-000094  e3a0007f          MOV      r0,#0x7f
-000098  ebfffffe          BL       sysSetLocalInterrupt
-;;;444    
-;;;445        sysprintf("+-------------------------------------------------+\n");
-00009c  e28f00c8          ADR      r0,|L7.364|
-0000a0  ebfffffe          BL       sysprintf
-;;;446        sysprintf("|                 Tslib Sample Code               |\n");
-0000a4  e28f00f8          ADR      r0,|L7.420|
-0000a8  ebfffffe          BL       sysprintf
-;;;447        sysprintf("+-------------------------------------------------+\n\n");
-0000ac  e28f0f4a          ADR      r0,|L7.476|
-0000b0  ebfffffe          BL       sysprintf
-;;;448        LCD_initial();
-0000b4  ebfffffe          BL       LCD_initial
-;;;449    
-;;;450    #ifdef GUI_SUPPORT_TOUCH
-;;;451        Init_TouchPanel();
-0000b8  ebfffffe          BL       Init_TouchPanel
-;;;452    
-;;;453    #ifdef __USE_SD__
-;;;454        SD_SetReferenceClock(300000);
-;;;455        SD_Open_Disk(SD_PORT0 | CardDetect_From_GPIO);
-;;;456        if (gCardInit)
-;;;457        {
-;;;458            gCardInit = 0;
-;;;459            SD_Open_Disk(SD_PORT0 | CardDetect_From_GPIO);
-;;;460        }
-;;;461    
-;;;462        if(!(SD_CardDetection(SD_Drv)))
-;;;463            while(1);
-;;;464        sysprintf("rc=%d\n", (WORD)disk_initialize(0));
-;;;465        disk_read(0, Buff, 2, 1);
-;;;466        f_mount(&FatFs[0], "", 0);  // for FATFS v0.11
-;;;467    #endif
-;;;468    
-;;;469        GUI_Init();
-0000bc  ebfffffe          BL       GUI_Init
-;;;470    
-;;;471    #ifdef __USE_SD__
-;;;472        res = f_open(&hFile, "0:\\ts_calib", FA_OPEN_EXISTING | FA_READ);
-;;;473        if (res)
-;;;474        {
-;;;475            // file does not exists, so do calibration
-;;;476            res = f_open(&hFile, "0:\\ts_calib", FA_CREATE_ALWAYS | FA_WRITE);
-;;;477            if ( res )
-;;;478            {
-;;;479                f_close(&hFile);
-;;;480                GUI_DispStringAt("CANNOT create the calibration file.\nPlease insert a SD card then reboot.", 0, 0);
-;;;481                while(1);
-;;;482            }
-;;;483    
-;;;484            ts_calibrate(__DEMO_TS_WIDTH__, __DEMO_TS_HEIGHT__);
-;;;485            //GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
-;;;486            ts_writefile();
-;;;487        }
-;;;488        else
-;;;489        {
-;;;490            ts_readfile();
-;;;491        }
-;;;492        f_close(&hFile);
-;;;493    #else
-;;;494        _DemoSpiInit();
-0000c0  ebfffffe          BL       _DemoSpiInit
-;;;495    
-;;;496        // check flash id
-;;;497        if((u16ID = SpiFlash_ReadMidDid()) == 0xEF17)
-0000c4  ebfffffe          BL       SpiFlash_ReadMidDid
-0000c8  e2401cef          SUB      r1,r0,#0xef00
-0000cc  e2511017          SUBS     r1,r1,#0x17
-0000d0  0a00001c          BEQ      |L7.328|
-;;;498            sysprintf("Flash found: W25Q128BV ...\n");
-;;;499        else
-;;;500            sysprintf("Flash ID, 0x%x\n", u16ID);
-0000d4  e1a01000          MOV      r1,r0
-0000d8  e28f0f4d          ADR      r0,|L7.532|
-0000dc  ebfffffe          BL       sysprintf
-                  |L7.224|
+;;;433    #endif
+;;;434    
+;;;435    //    OS_TimeMS = 0;
+;;;436    
+;;;437        SYS_Init();
+;;;438    
+;;;439        sysSetTimerReferenceClock(TIMER0, 12000000);
+000054  e59f10e8          LDR      r1,|L6.324|
+000058  ebfffffe          BL       sysSetTimerReferenceClock
+;;;440        sysStartTimer(TIMER0, 1000, PERIODIC_MODE);         /* 1000 ticks/per sec ==> 1tick/1ms */
+00005c  e3a02001          MOV      r2,#1
+000060  e3a01ffa          MOV      r1,#0x3e8
+000064  e3a00000          MOV      r0,#0
+000068  ebfffffe          BL       sysStartTimer
+;;;441    //    sysSetTimerEvent(TIMER0,  1, (PVOID)TMR0_IRQHandler);           /*  1 tick  per call back */
+;;;442        sysSetTimerEvent(TIMER0, 10, (PVOID)TMR0_IRQHandler_TouchTask); /* 10 ticks per call back */
+00006c  e59f20d4          LDR      r2,|L6.328|
+000070  e3a0100a          MOV      r1,#0xa
+000074  e3a00000          MOV      r0,#0
+000078  ebfffffe          BL       sysSetTimerEvent
+;;;443    
+;;;444    #ifdef __USE_SD__
+;;;445        sysInstallISR(HIGH_LEVEL_SENSITIVE|IRQ_LEVEL_1, SDH_IRQn, (PVOID)SDH_IRQHandler);
+;;;446        sysEnableInterrupt(SDH_IRQn);
+;;;447    #endif
+;;;448    
+;;;449        sysSetLocalInterrupt(ENABLE_IRQ);
+00007c  e3a0007f          MOV      r0,#0x7f
+000080  ebfffffe          BL       sysSetLocalInterrupt
+;;;450    
+;;;451        sysprintf("+-------------------------------------------------+\n");
+000084  e28f00c0          ADR      r0,|L6.332|
+000088  ebfffffe          BL       sysprintf
+;;;452        sysprintf("|                 Tslib Sample Code               |\n");
+00008c  e28f00f0          ADR      r0,|L6.388|
+000090  ebfffffe          BL       sysprintf
+;;;453        sysprintf("+-------------------------------------------------+\n\n");
+000094  e28f0e12          ADR      r0,|L6.444|
+000098  ebfffffe          BL       sysprintf
+;;;454        LCD_initial();
+00009c  ebfffffe          BL       LCD_initial
+;;;455    
+;;;456    #ifdef GUI_SUPPORT_TOUCH
+;;;457        Init_TouchPanel();
+0000a0  ebfffffe          BL       Init_TouchPanel
+;;;458    
+;;;459    #ifdef __USE_SD__
+;;;460        SD_SetReferenceClock(300000);
+;;;461        SD_Open_Disk(SD_PORT0 | CardDetect_From_GPIO);
+;;;462        if (gCardInit)
+;;;463        {
+;;;464            gCardInit = 0;
+;;;465            SD_Open_Disk(SD_PORT0 | CardDetect_From_GPIO);
+;;;466        }
+;;;467    
+;;;468        if(!(SD_CardDetection(SD_Drv)))
+;;;469            while(1);
+;;;470        sysprintf("rc=%d\n", (WORD)disk_initialize(0));
+;;;471        disk_read(0, Buff, 2, 1);
+;;;472        f_mount(&FatFs[0], "", 0);  // for FATFS v0.11
+;;;473    #endif
+;;;474    
+;;;475        GUI_Init();
+0000a4  ebfffffe          BL       GUI_Init
+;;;476    
+;;;477    #ifdef __USE_SD__
+;;;478        res = f_open(&hFile, "0:\\ts_calib", FA_OPEN_EXISTING | FA_READ);
+;;;479        if (res)
+;;;480        {
+;;;481            // file does not exists, so do calibration
+;;;482            res = f_open(&hFile, "0:\\ts_calib", FA_CREATE_ALWAYS | FA_WRITE);
+;;;483            if ( res )
+;;;484            {
+;;;485                f_close(&hFile);
+;;;486                GUI_DispStringAt("CANNOT create the calibration file.\nPlease insert a SD card then reboot.", 0, 0);
+;;;487                while(1);
+;;;488            }
+;;;489    
+;;;490            ts_calibrate(__DEMO_TS_WIDTH__, __DEMO_TS_HEIGHT__);
+;;;491            //GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
+;;;492            ts_writefile();
+;;;493        }
+;;;494        else
+;;;495        {
+;;;496            ts_readfile();
+;;;497        }
+;;;498        f_close(&hFile);
+;;;499    #else
+;;;500        _DemoSpiInit();
+0000a8  ebfffffe          BL       _DemoSpiInit
 ;;;501    
-;;;502        SpiFlash_NormalRead(__DEMO_TSFILE_ADDR__, DestArray, 32);
-0000e0  e59f113c          LDR      r1,|L7.548|
-0000e4  e3a02020          MOV      r2,#0x20
-0000e8  e3a00706          MOV      r0,#0x180000
-0000ec  ebfffffe          BL       SpiFlash_NormalRead
-;;;503        g_pu32Res = (uint32_t *)DestArray;
-0000f0  e59f012c          LDR      r0,|L7.548|
-;;;504        sysprintf("%x\n", g_pu32Res[7]);
-0000f4  e584001c          STR      r0,[r4,#0x1c]  ; g_pu32Res
-0000f8  e590101c          LDR      r1,[r0,#0x1c]
-0000fc  e28f0f47          ADR      r0,|L7.544|
-000100  ebfffffe          BL       sysprintf
-;;;505        if (g_pu32Res[7] != 0x55AAA55A)
-000104  e594001c          LDR      r0,[r4,#0x1c]  ; g_pu32Res
-000108  e59f1118          LDR      r1,|L7.552|
-00010c  e590001c          LDR      r0,[r0,#0x1c]
-000110  e1500001          CMP      r0,r1
-000114  0a000052          BEQ      |L7.612|
-;;;506        {
-;;;507            ts_calibrate(XSIZE_PHYS, YSIZE_PHYS);
-000118  e3a01e1e          MOV      r1,#0x1e0
-00011c  e3a00e32          MOV      r0,#0x320
-000120  ebfffffe          BL       ts_calibrate
-;;;508            //GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
-;;;509            sysprintf("Sector Erase ...");
-000124  e28f0c01          ADR      r0,|L7.556|
-000128  ebfffffe          BL       sysprintf
-;;;510    
-;;;511            /* Sector erase SPI flash */
-;;;512            SpiFlash_SectorErase(__DEMO_TSFILE_ADDR__);
-00012c  e3a00706          MOV      r0,#0x180000
-000130  ebfffffe          BL       SpiFlash_SectorErase
-;;;513    
-;;;514            /* Wait ready */
-;;;515            SpiFlash_WaitReady();
-000134  ebfffffe          BL       SpiFlash_WaitReady
+;;;502        // check flash id
+;;;503        if((u16ID = SpiFlash_ReadMidDid()) == 0xEF17)
+0000ac  ebfffffe          BL       SpiFlash_ReadMidDid
+0000b0  e2401cef          SUB      r1,r0,#0xef00
+0000b4  e2511017          SUBS     r1,r1,#0x17
+0000b8  0a00001c          BEQ      |L6.304|
+;;;504            sysprintf("Flash found: W25Q128BV ...\n");
+;;;505        else
+;;;506            sysprintf("Flash ID, 0x%x\n", u16ID);
+0000bc  e1a01000          MOV      r1,r0
+0000c0  e28f0f4b          ADR      r0,|L6.500|
+0000c4  ebfffffe          BL       sysprintf
+                  |L6.200|
+;;;507    
+;;;508        SpiFlash_NormalRead(__DEMO_TSFILE_ADDR__, DestArray, 32);
+0000c8  e59f1134          LDR      r1,|L6.516|
+0000cc  e3a02020          MOV      r2,#0x20
+0000d0  e3a00706          MOV      r0,#0x180000
+0000d4  ebfffffe          BL       SpiFlash_NormalRead
+;;;509        g_pu32Res = (uint32_t *)DestArray;
+0000d8  e59f0124          LDR      r0,|L6.516|
+;;;510        sysprintf("%x\n", g_pu32Res[7]);
+0000dc  e584001c          STR      r0,[r4,#0x1c]  ; g_pu32Res
+0000e0  e590101c          LDR      r1,[r0,#0x1c]
+0000e4  e28f0f45          ADR      r0,|L6.512|
+0000e8  ebfffffe          BL       sysprintf
+;;;511        if (g_pu32Res[7] != 0x55AAA55A)
+0000ec  e594001c          LDR      r0,[r4,#0x1c]  ; g_pu32Res
+0000f0  e59f1110          LDR      r1,|L6.520|
+0000f4  e590001c          LDR      r0,[r0,#0x1c]
+0000f8  e1500001          CMP      r0,r1
+0000fc  0a000050          BEQ      |L6.580|
+;;;512        {
+;;;513            ts_calibrate(XSIZE_PHYS, YSIZE_PHYS);
+000100  e3a01e1e          MOV      r1,#0x1e0
+000104  e3a00e32          MOV      r0,#0x320
+000108  ebfffffe          BL       ts_calibrate
+;;;514            //GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
+;;;515            sysprintf("Sector Erase ...");
+00010c  e28f00f8          ADR      r0,|L6.524|
+000110  ebfffffe          BL       sysprintf
 ;;;516    
-;;;517            ts_writefile();
-000138  ebfffffe          BL       ts_writefile
-;;;518            sysprintf("[OK]\n");
-00013c  e28f00fc          ADR      r0,|L7.576|
-000140  ebfffffe          BL       sysprintf
-000144  ea000047          B        |L7.616|
-                  |L7.328|
-000148  e28f00f8          ADR      r0,|L7.584|
-00014c  ebfffffe          BL       sysprintf
-000150  eaffffe2          B        |L7.224|
-                  |L7.340|
+;;;517            /* Sector erase SPI flash */
+;;;518            SpiFlash_SectorErase(__DEMO_TSFILE_ADDR__);
+000114  e3a00706          MOV      r0,#0x180000
+000118  ebfffffe          BL       SpiFlash_SectorErase
+;;;519    
+;;;520            /* Wait ready */
+;;;521            SpiFlash_WaitReady();
+00011c  ebfffffe          BL       SpiFlash_WaitReady
+;;;522    
+;;;523            ts_writefile();
+000120  ebfffffe          BL       ts_writefile
+;;;524            sysprintf("[OK]\n");
+000124  e28f00f4          ADR      r0,|L6.544|
+000128  ebfffffe          BL       sysprintf
+00012c  ea000045          B        |L6.584|
+                  |L6.304|
+000130  e28f00f0          ADR      r0,|L6.552|
+000134  ebfffffe          BL       sysprintf
+000138  eaffffe2          B        |L6.200|
+                  |L6.316|
                           DCD      0xb8002000
-                  |L7.344|
+                  |L6.320|
                           DCD      ||.data||
-                  |L7.348|
-                          DCD      OS_TimeMS
-                  |L7.352|
+                  |L6.324|
                           DCD      0x00b71b00
-                  |L7.356|
-                          DCD      TMR0_IRQHandler
-                  |L7.360|
+                  |L6.328|
                           DCD      TMR0_IRQHandler_TouchTask
-                  |L7.364|
-00016c  2b2d2d2d          DCB      "+-------------------------------------------------+\n",0
+                  |L6.332|
+00014c  2b2d2d2d          DCB      "+-------------------------------------------------+\n",0
+000150  2d2d2d2d
+000154  2d2d2d2d
+000158  2d2d2d2d
+00015c  2d2d2d2d
+000160  2d2d2d2d
+000164  2d2d2d2d
+000168  2d2d2d2d
+00016c  2d2d2d2d
 000170  2d2d2d2d
 000174  2d2d2d2d
 000178  2d2d2d2d
-00017c  2d2d2d2d
-000180  2d2d2d2d
-000184  2d2d2d2d
-000188  2d2d2d2d
-00018c  2d2d2d2d
-000190  2d2d2d2d
-000194  2d2d2d2d
-000198  2d2d2d2d
-00019c  2d2d2b0a
-0001a0  00      
-0001a1  00                DCB      0
-0001a2  00                DCB      0
-0001a3  00                DCB      0
-                  |L7.420|
-0001a4  7c202020          DCB      "|                 Tslib Sample Code               |\n",0
+00017c  2d2d2b0a
+000180  00      
+000181  00                DCB      0
+000182  00                DCB      0
+000183  00                DCB      0
+                  |L6.388|
+000184  7c202020          DCB      "|                 Tslib Sample Code               |\n",0
+000188  20202020
+00018c  20202020
+000190  20202020
+000194  20205473
+000198  6c696220
+00019c  53616d70
+0001a0  6c652043
+0001a4  6f646520
 0001a8  20202020
 0001ac  20202020
 0001b0  20202020
-0001b4  20205473
-0001b8  6c696220
-0001bc  53616d70
-0001c0  6c652043
-0001c4  6f646520
-0001c8  20202020
-0001cc  20202020
-0001d0  20202020
-0001d4  20207c0a
-0001d8  00      
-0001d9  00                DCB      0
-0001da  00                DCB      0
-0001db  00                DCB      0
-                  |L7.476|
-0001dc  2b2d2d2d          DCB      "+-------------------------------------------------+\n\n"
+0001b4  20207c0a
+0001b8  00      
+0001b9  00                DCB      0
+0001ba  00                DCB      0
+0001bb  00                DCB      0
+                  |L6.444|
+0001bc  2b2d2d2d          DCB      "+-------------------------------------------------+\n\n"
+0001c0  2d2d2d2d
+0001c4  2d2d2d2d
+0001c8  2d2d2d2d
+0001cc  2d2d2d2d
+0001d0  2d2d2d2d
+0001d4  2d2d2d2d
+0001d8  2d2d2d2d
+0001dc  2d2d2d2d
 0001e0  2d2d2d2d
 0001e4  2d2d2d2d
 0001e8  2d2d2d2d
-0001ec  2d2d2d2d
-0001f0  2d2d2d2d
-0001f4  2d2d2d2d
-0001f8  2d2d2d2d
-0001fc  2d2d2d2d
-000200  2d2d2d2d
-000204  2d2d2d2d
-000208  2d2d2d2d
-00020c  2d2d2b0a
-000210  0a      
-000211  00                DCB      0
-000212  00                DCB      0
-000213  00                DCB      0
-                  |L7.532|
-000214  466c6173          DCB      "Flash ID, 0x"
-000218  68204944
-00021c  2c203078
-                  |L7.544|
-000220  25780a00          DCB      "%x\n",0
-                  |L7.548|
+0001ec  2d2d2b0a
+0001f0  0a      
+0001f1  00                DCB      0
+0001f2  00                DCB      0
+0001f3  00                DCB      0
+                  |L6.500|
+0001f4  466c6173          DCB      "Flash ID, 0x"
+0001f8  68204944
+0001fc  2c203078
+                  |L6.512|
+000200  25780a00          DCB      "%x\n",0
+                  |L6.516|
                           DCD      ||.bss||
-                  |L7.552|
+                  |L6.520|
                           DCD      0x55aaa55a
-                  |L7.556|
-00022c  53656374          DCB      "Sector Erase ...",0
-000230  6f722045
-000234  72617365
-000238  202e2e2e
-00023c  00      
-00023d  00                DCB      0
-00023e  00                DCB      0
-00023f  00                DCB      0
-                  |L7.576|
-000240  5b4f4b5d          DCB      "[OK]\n",0
-000244  0a00    
-000246  00                DCB      0
-000247  00                DCB      0
-                  |L7.584|
-000248  466c6173          DCB      "Flash found: W25Q128BV ...\n",0
-00024c  6820666f
-000250  756e643a
-000254  20573235
-000258  51313238
-00025c  4256202e
-000260  2e2e0a00
-                  |L7.612|
-;;;519        }
-;;;520        else
-;;;521            ts_readfile();
-000264  ebfffffe          BL       ts_readfile
-                  |L7.616|
-;;;522    #endif
-;;;523    
-;;;524    //    ts_test(__DEMO_TS_WIDTH__, __DEMO_TS_HEIGHT__);
-;;;525    
-;;;526        g_enable_Touch = 1;
-000268  e3a00001          MOV      r0,#1
-00026c  e5840020          STR      r0,[r4,#0x20]  ; g_enable_Touch
-;;;527    #endif
-;;;528    
-;;;529    }
-000270  e8bd8010          POP      {r4,pc}
-;;;530    
+                  |L6.524|
+00020c  53656374          DCB      "Sector Erase ...",0
+000210  6f722045
+000214  72617365
+000218  202e2e2e
+00021c  00      
+00021d  00                DCB      0
+00021e  00                DCB      0
+00021f  00                DCB      0
+                  |L6.544|
+000220  5b4f4b5d          DCB      "[OK]\n",0
+000224  0a00    
+000226  00                DCB      0
+000227  00                DCB      0
+                  |L6.552|
+000228  466c6173          DCB      "Flash found: W25Q128BV ...\n",0
+00022c  6820666f
+000230  756e643a
+000234  20573235
+000238  51313238
+00023c  4256202e
+000240  2e2e0a00
+                  |L6.580|
+;;;525        }
+;;;526        else
+;;;527            ts_readfile();
+000244  ebfffffe          BL       ts_readfile
+                  |L6.584|
+;;;528    #endif
+;;;529    
+;;;530    //    ts_test(__DEMO_TS_WIDTH__, __DEMO_TS_HEIGHT__);
+;;;531    
+;;;532        g_enable_Touch = 1;
+000248  e3a00001          MOV      r0,#1
+00024c  e5840020          STR      r0,[r4,#0x20]  ; g_enable_Touch
+;;;533    #endif
+;;;534    
+;;;535    }
+000250  e8bd8010          POP      {r4,pc}
+;;;536    
                           ENDP
 
 
                           AREA ||i.vTaskLogMsg1s||, CODE, READONLY, ALIGN=2
 
                   vTaskLogMsg1s PROC
-;;;360    
-;;;361    void vTaskLogMsg1s( void *pvParameters )
-000000  e59f403c          LDR      r4,|L8.68|
-;;;362    {	
+;;;366    
+;;;367    void vTaskLogMsg1s( void *pvParameters )
+000000  e59f403c          LDR      r4,|L7.68|
+;;;368    {	
 000004  e92d4008          PUSH     {r3,lr}
-;;;363    	static uint32_t Cnt_LogMsg = 0;
-;;;364    	uint32_t millisec = 1000;
+;;;369    	static uint32_t Cnt_LogMsg = 0;
+;;;370    	uint32_t millisec = 1000;
 000008  e3a06ffa          MOV      r6,#0x3e8
-                  |L8.12|
-;;;365    
-;;;366    //	portTickType xLastWakeTime;
-;;;367    //	xLastWakeTime = xTaskGetTickCount();
-;;;368    
-;;;369    	(void) pvParameters;
-;;;370    	for( ;; )
-;;;371    	{
-;;;372    //        vTaskDelayUntil( &xLastWakeTime, ( millisec *configTICK_RATE_HZ / ( ( TickType_t ) 1000 ) ));
-;;;373    		GUI_X_Delay(millisec);		
+                  |L7.12|
+;;;371    
+;;;372    //	portTickType xLastWakeTime;
+;;;373    //	xLastWakeTime = xTaskGetTickCount();
+;;;374    
+;;;375    	(void) pvParameters;
+;;;376    	for( ;; )
+;;;377    	{
+;;;378    //        vTaskDelayUntil( &xLastWakeTime, ( millisec *configTICK_RATE_HZ / ( ( TickType_t ) 1000 ) ));
+;;;379    		GUI_X_Delay(millisec);		
 00000c  e1a00006          MOV      r0,r6
 000010  ebfffffe          BL       GUI_X_Delay
-;;;374    		sysprintf("vTaskLogMsg1s:Log(%4dms):%4d (%4d bytes,%4d bytes)\r\n" ,millisec ,++Cnt_LogMsg,xPortGetFreeHeapSize(),GUI_ALLOC_GetNumFreeBytes());
+;;;380    		sysprintf("vTaskLogMsg1s:Log(%4dms):%4d (%4d bytes,%4d bytes)\r\n" ,millisec ,++Cnt_LogMsg,xPortGetFreeHeapSize(),GUI_ALLOC_GetNumFreeBytes());
 000014  ebfffffe          BL       GUI_ALLOC_GetNumFreeBytes
 000018  e1a05000          MOV      r5,r0
 00001c  ebfffffe          BL       xPortGetFreeHeapSize
@@ -707,20 +693,20 @@
 000028  e5940008          LDR      r0,[r4,#8]  ; Cnt_LogMsg
 00002c  e1a01006          MOV      r1,r6
 000030  e2802001          ADD      r2,r0,#1
-000034  e28f000c          ADR      r0,|L8.72|
+000034  e28f000c          ADR      r0,|L7.72|
 000038  e5842008          STR      r2,[r4,#8]  ; Cnt_LogMsg
 00003c  ebfffffe          BL       sysprintf
-000040  eafffff1          B        |L8.12|
-;;;375    
-;;;376    	}
-;;;377      
-;;;378    }
-;;;379    
+000040  eafffff1          B        |L7.12|
+;;;381    
+;;;382    	}
+;;;383      
+;;;384    }
+;;;385    
                           ENDP
 
-                  |L8.68|
+                  |L7.68|
                           DCD      ||.data||
-                  |L8.72|
+                  |L7.72|
 000048  76546173          DCB      "vTaskLogMsg1s:Log(%4dms):%4d (%4d bytes,%4d bytes)\r\n",0
 00004c  6b4c6f67
 000050  4d736731
@@ -742,27 +728,27 @@
                           AREA ||i.vTaskLogMsg500ms||, CODE, READONLY, ALIGN=2
 
                   vTaskLogMsg500ms PROC
-;;;322    
-;;;323    void vTaskLogMsg500ms( void *pvParameters )
-000000  e59f403c          LDR      r4,|L9.68|
-;;;324    {	
+;;;328    
+;;;329    void vTaskLogMsg500ms( void *pvParameters )
+000000  e59f403c          LDR      r4,|L8.68|
+;;;330    {	
 000004  e92d4008          PUSH     {r3,lr}
-;;;325    	static uint32_t Cnt_LogMsg = 0;
-;;;326    	uint32_t millisec = 500;
+;;;331    	static uint32_t Cnt_LogMsg = 0;
+;;;332    	uint32_t millisec = 500;
 000008  e3a06f7d          MOV      r6,#0x1f4
-                  |L9.12|
-;;;327    
-;;;328    //	portTickType xLastWakeTime;
-;;;329    //	xLastWakeTime = xTaskGetTickCount();
-;;;330    
-;;;331    	(void) pvParameters;
-;;;332    	for( ;; )
-;;;333    	{
-;;;334    //        vTaskDelayUntil( &xLastWakeTime, ( millisec *configTICK_RATE_HZ / ( ( TickType_t ) 1000 ) ));
-;;;335    		GUI_X_Delay(millisec);			
+                  |L8.12|
+;;;333    
+;;;334    //	portTickType xLastWakeTime;
+;;;335    //	xLastWakeTime = xTaskGetTickCount();
+;;;336    
+;;;337    	(void) pvParameters;
+;;;338    	for( ;; )
+;;;339    	{
+;;;340    //        vTaskDelayUntil( &xLastWakeTime, ( millisec *configTICK_RATE_HZ / ( ( TickType_t ) 1000 ) ));
+;;;341    		GUI_X_Delay(millisec);			
 00000c  e1a00006          MOV      r0,r6
 000010  ebfffffe          BL       GUI_X_Delay
-;;;336    		sysprintf("vTaskLogMsg500ms:Log(%4dms):%4d (%4d bytes,%4d bytes)\r\n" ,millisec ,++Cnt_LogMsg,xPortGetFreeHeapSize(),GUI_ALLOC_GetNumFreeBytes());
+;;;342    		sysprintf("vTaskLogMsg500ms:Log(%4dms):%4d (%4d bytes,%4d bytes)\r\n" ,millisec ,++Cnt_LogMsg,xPortGetFreeHeapSize(),GUI_ALLOC_GetNumFreeBytes());
 000014  ebfffffe          BL       GUI_ALLOC_GetNumFreeBytes
 000018  e1a05000          MOV      r5,r0
 00001c  ebfffffe          BL       xPortGetFreeHeapSize
@@ -771,20 +757,20 @@
 000028  e5940000          LDR      r0,[r4,#0]  ; Cnt_LogMsg
 00002c  e1a01006          MOV      r1,r6
 000030  e2802001          ADD      r2,r0,#1
-000034  e28f000c          ADR      r0,|L9.72|
+000034  e28f000c          ADR      r0,|L8.72|
 000038  e5842000          STR      r2,[r4,#0]  ; Cnt_LogMsg
 00003c  ebfffffe          BL       sysprintf
-000040  eafffff1          B        |L9.12|
-;;;337    
-;;;338    	}
-;;;339      
-;;;340    }
-;;;341    
+000040  eafffff1          B        |L8.12|
+;;;343    
+;;;344    	}
+;;;345      
+;;;346    }
+;;;347    
                           ENDP
 
-                  |L9.68|
+                  |L8.68|
                           DCD      ||.data||
-                  |L9.72|
+                  |L8.72|
 000048  76546173          DCB      "vTaskLogMsg500ms:Log(%4dms):%4d (%4d bytes,%4d bytes)\r"
 00004c  6b4c6f67
 000050  4d736735
@@ -804,26 +790,26 @@
                           AREA ||i.vTaskLogMsg5s||, CODE, READONLY, ALIGN=2
 
                   vTaskLogMsg5s PROC
-;;;341    
-;;;342    void vTaskLogMsg5s( void *pvParameters )
-000000  e59f603c          LDR      r6,|L10.68|
-;;;343    {	
-;;;344    	static uint32_t Cnt_LogMsg = 0;
-;;;345    	uint32_t millisec = 5000;
-;;;346    
-;;;347    //	portTickType xLastWakeTime;
-;;;348    //	xLastWakeTime = xTaskGetTickCount();
-;;;349    
-;;;350    	(void) pvParameters;
-;;;351    	for( ;; )
-;;;352    	{
-;;;353    //        vTaskDelayUntil( &xLastWakeTime, ( millisec *configTICK_RATE_HZ / ( ( TickType_t ) 1000 ) ));
-;;;354    		GUI_X_Delay(millisec);			
-;;;355    		sysprintf("vTaskLogMsg5s:Log(%4dms):%4d (%4d bytes,%4d bytes)\r\n" ,millisec ,++Cnt_LogMsg,xPortGetFreeHeapSize(),GUI_ALLOC_GetNumFreeBytes());
-000004  e59f403c          LDR      r4,|L10.72|
-000008  e92d4008          PUSH     {r3,lr}               ;343
-                  |L10.12|
-00000c  e1a00006          MOV      r0,r6                 ;354
+;;;347    
+;;;348    void vTaskLogMsg5s( void *pvParameters )
+000000  e59f603c          LDR      r6,|L9.68|
+;;;349    {	
+;;;350    	static uint32_t Cnt_LogMsg = 0;
+;;;351    	uint32_t millisec = 5000;
+;;;352    
+;;;353    //	portTickType xLastWakeTime;
+;;;354    //	xLastWakeTime = xTaskGetTickCount();
+;;;355    
+;;;356    	(void) pvParameters;
+;;;357    	for( ;; )
+;;;358    	{
+;;;359    //        vTaskDelayUntil( &xLastWakeTime, ( millisec *configTICK_RATE_HZ / ( ( TickType_t ) 1000 ) ));
+;;;360    		GUI_X_Delay(millisec);			
+;;;361    		sysprintf("vTaskLogMsg5s:Log(%4dms):%4d (%4d bytes,%4d bytes)\r\n" ,millisec ,++Cnt_LogMsg,xPortGetFreeHeapSize(),GUI_ALLOC_GetNumFreeBytes());
+000004  e59f403c          LDR      r4,|L9.72|
+000008  e92d4008          PUSH     {r3,lr}               ;349
+                  |L9.12|
+00000c  e1a00006          MOV      r0,r6                 ;360
 000010  ebfffffe          BL       GUI_X_Delay
 000014  ebfffffe          BL       GUI_ALLOC_GetNumFreeBytes
 000018  e1a05000          MOV      r5,r0
@@ -833,22 +819,22 @@
 000028  e5940004          LDR      r0,[r4,#4]  ; Cnt_LogMsg
 00002c  e1a01006          MOV      r1,r6
 000030  e2802001          ADD      r2,r0,#1
-000034  e28f0010          ADR      r0,|L10.76|
+000034  e28f0010          ADR      r0,|L9.76|
 000038  e5842004          STR      r2,[r4,#4]  ; Cnt_LogMsg
 00003c  ebfffffe          BL       sysprintf
-000040  eafffff1          B        |L10.12|
-;;;356    
-;;;357    	}
-;;;358      
-;;;359    }
-;;;360    
+000040  eafffff1          B        |L9.12|
+;;;362    
+;;;363    	}
+;;;364      
+;;;365    }
+;;;366    
                           ENDP
 
-                  |L10.68|
+                  |L9.68|
                           DCD      0x00001388
-                  |L10.72|
+                  |L9.72|
                           DCD      ||.data||
-                  |L10.76|
+                  |L9.76|
 00004c  76546173          DCB      "vTaskLogMsg5s:Log(%4dms):%4d (%4d bytes,%4d bytes)\r\n",0
 000050  6b4c6f67
 000054  4d736735
@@ -870,17 +856,17 @@
                           AREA ||i.vTaskemWin||, CODE, READONLY, ALIGN=2
 
                   vTaskemWin PROC
-;;;530    
-;;;531    void vTaskemWin( void *pvParameters )
+;;;536    
+;;;537    void vTaskemWin( void *pvParameters )
 000000  ebfffffe          BL       MainTask
-;;;532    {
-;;;533    
-;;;534        /* Parameters are not used. */
-;;;535        ( void ) pvParameters;
-;;;536    	MainTask();
-;;;537    	
-;;;538    }
+;;;538    {
 ;;;539    
+;;;540        /* Parameters are not used. */
+;;;541        ( void ) pvParameters;
+;;;542    	MainTask();
+;;;543    	
+;;;544    }
+;;;545    
                           ENDP
 
 
@@ -905,9 +891,9 @@
 
                   Cnt_LogMsg
                           DCD      0x00000000
-                  |symbol_number.39|
+                  |symbol_number.36|
                           DCD      0x00000000
-                  |symbol_number.40|
+                  |symbol_number.37|
                           DCD      0x00000000
                   xTaskemWinHandle
                           DCD      0x00000000

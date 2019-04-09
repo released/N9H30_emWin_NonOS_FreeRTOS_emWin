@@ -26,10 +26,8 @@
 000010  e8bd4010          POP      {r4,lr}
 000014  e59f0004          LDR      r0,|L1.32|
 000018  eafffffe          B        GUI_SetDefaultFont
-;;;84     
-;;;85     //  GUITASK_SetMaxTask(5);
-;;;86     }
-;;;87     
+;;;84     }
+;;;85     
                           ENDP
 
                   |L1.28|

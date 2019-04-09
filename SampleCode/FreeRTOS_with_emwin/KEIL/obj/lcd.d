@@ -1,0 +1,9 @@
+.\obj\lcd.o: ..\..\..\Driver\Source\lcd.c
+.\obj\lcd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\lcd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\obj\lcd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\obj\lcd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\obj\lcd.o: ..\..\..\Driver\Include\N9H30.h
+.\obj\lcd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\lcd.o: ..\..\..\Driver\Include\sys.h
+.\obj\lcd.o: ..\..\..\Driver\Include\lcd.h

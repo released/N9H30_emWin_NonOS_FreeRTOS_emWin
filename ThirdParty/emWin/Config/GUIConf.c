@@ -81,8 +81,6 @@ void GUI_X_Config(void) {
   // Set default font
   //
   GUI_SetDefaultFont(GUI_FONT_6X8);
-
-//  GUITASK_SetMaxTask(5);
 }
 
 /*************************** End of file ****************************/

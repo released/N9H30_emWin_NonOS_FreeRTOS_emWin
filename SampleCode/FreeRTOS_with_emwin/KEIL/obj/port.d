@@ -1,0 +1,15 @@
+.\obj\port.o: ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\portable\RVDS\ARM9_N9H30\port.c
+.\obj\port.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\obj\port.o: ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\FreeRTOS.h
+.\obj\port.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\port.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\port.o: ..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h
+.\obj\port.o: ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\projdefs.h
+.\obj\port.o: ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\portable.h
+.\obj\port.o: ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\deprecated_definitions.h
+.\obj\port.o: ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\portable\RVDS\ARM9_N9H30\portmacro.h
+.\obj\port.o: ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\mpu_wrappers.h
+.\obj\port.o: ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\task.h
+.\obj\port.o: ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\list.h
+.\obj\port.o: ..\..\..\Driver\Include\N9H30.h
+.\obj\port.o: ..\..\..\Driver\Include\sys.h

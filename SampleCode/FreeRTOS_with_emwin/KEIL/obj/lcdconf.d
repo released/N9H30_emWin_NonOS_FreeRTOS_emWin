@@ -1,0 +1,16 @@
+.\obj\lcdconf.o: ..\..\..\ThirdParty\emWin\Config\LCDConf.c
+.\obj\lcdconf.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\lcdconf.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\lcdconf.o: ..\..\..\Driver\Include\N9H30.h
+.\obj\lcdconf.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\lcdconf.o: ..\tslib\TouchPanel.h
+.\obj\lcdconf.o: ..\..\..\ThirdParty\emWin\Include\GUI.h
+.\obj\lcdconf.o: ..\..\..\ThirdParty\emWin\Include\GUI_ConfDefaults.h
+.\obj\lcdconf.o: ..\..\..\ThirdParty\emWin\Config\GUIConf.h
+.\obj\lcdconf.o: ..\..\..\ThirdParty\emWin\Include\GUI_Type.h
+.\obj\lcdconf.o: ..\..\..\ThirdParty\emWin\Include\LCD.h
+.\obj\lcdconf.o: ..\..\..\ThirdParty\emWin\Include\Global.h
+.\obj\lcdconf.o: ..\..\..\ThirdParty\emWin\Include\GUI_Version.h
+.\obj\lcdconf.o: ..\..\..\ThirdParty\emWin\Include\GUIDRV_Lin.h
+.\obj\lcdconf.o: ..\..\..\ThirdParty\emWin\Config\LCDconf.h
+.\obj\lcdconf.o: ..\..\..\Driver\Include\lcd.h

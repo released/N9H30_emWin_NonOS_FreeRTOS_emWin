@@ -1,0 +1,17 @@
+.\obj\fbutils.o: ..\tslib\fbutils.c
+.\obj\fbutils.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\fbutils.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\obj\fbutils.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\obj\fbutils.o: ..\tslib\fbutils.h
+.\obj\fbutils.o: ..\..\..\Driver\Include\N9H30.h
+.\obj\fbutils.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\fbutils.o: ..\..\..\Driver\Include\lcd.h
+.\obj\fbutils.o: ..\..\..\ThirdParty\emWin\Include\GUI.h
+.\obj\fbutils.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\fbutils.o: ..\..\..\ThirdParty\emWin\Include\GUI_ConfDefaults.h
+.\obj\fbutils.o: ..\..\..\ThirdParty\emWin\Config\GUIConf.h
+.\obj\fbutils.o: ..\..\..\ThirdParty\emWin\Include\GUI_Type.h
+.\obj\fbutils.o: ..\..\..\ThirdParty\emWin\Include\LCD.h
+.\obj\fbutils.o: ..\..\..\ThirdParty\emWin\Include\Global.h
+.\obj\fbutils.o: ..\..\..\ThirdParty\emWin\Include\GUI_Version.h
+.\obj\fbutils.o: ..\tslib\TouchPanel.h

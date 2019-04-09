@@ -162,7 +162,7 @@ I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\list.h)(0x5C870DDC
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\timers.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\semphr.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\queue.h)(0x5C870DDC)
-F (..\..\..\ThirdParty\emWin\Config\GUIConf.c)(0x5C99E909)(-c --cpu ARM926EJ-S -g -O2 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I ..\..\..\Driver\Source -I ..\..\..\Driver\Include -I ..\..\..\ThirdParty\FATFS\src -I ..\..\..\ThirdParty\emWin\Config -I ..\..\..\ThirdParty\emWin\Include -I ..\..\FreeRTOS_with_emwin -I ..\tslib -I ..\Application -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\portable\RVDS\ARM9_N9H30 -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Demo\Common\include-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Toshiba-D__UVISION_VERSION="526" -D_PANEL_E50A2V1_16BPP_-o .\obj\guiconf.o --list_dir ".\\lst\\" --list --omf_browse .\obj\guiconf.crf --depend .\obj\guiconf.d)
+F (..\..\..\ThirdParty\emWin\Config\GUIConf.c)(0x5CAC1368)(-c --cpu ARM926EJ-S -g -O2 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I ..\..\..\Driver\Source -I ..\..\..\Driver\Include -I ..\..\..\ThirdParty\FATFS\src -I ..\..\..\ThirdParty\emWin\Config -I ..\..\..\ThirdParty\emWin\Include -I ..\..\FreeRTOS_with_emwin -I ..\tslib -I ..\Application -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\portable\RVDS\ARM9_N9H30 -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Demo\Common\include-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Toshiba-D__UVISION_VERSION="526" -D_PANEL_E50A2V1_16BPP_-o .\obj\guiconf.o --list_dir ".\\lst\\" --list --omf_browse .\obj\guiconf.crf --depend .\obj\guiconf.d)
 I (..\..\..\ThirdParty\emWin\Include\GUI.h)(0x5C870DDD)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x599EDB3C)
 I (..\..\..\ThirdParty\emWin\Include\GUI_ConfDefaults.h)(0x5C870DDD)
@@ -237,7 +237,31 @@ I (..\..\..\ThirdParty\emWin\Include\SPINBOX.h)(0x5C870DDD)
 I (..\..\..\ThirdParty\emWin\Include\SWIPELIST.h)(0x5C870DDD)
 I (..\..\..\ThirdParty\emWin\Include\TEXT.h)(0x5C870DDD)
 I (..\..\..\ThirdParty\emWin\Include\TREEVIEW.h)(0x5C870DDD)
-F (..\main.c)(0x5CA16BE9)(-c --cpu ARM926EJ-S -g -O2 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I ..\..\..\Driver\Source -I ..\..\..\Driver\Include -I ..\..\..\ThirdParty\FATFS\src -I ..\..\..\ThirdParty\emWin\Config -I ..\..\..\ThirdParty\emWin\Include -I ..\..\FreeRTOS_with_emwin -I ..\tslib -I ..\Application -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\portable\RVDS\ARM9_N9H30 -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Demo\Common\include-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Toshiba-D__UVISION_VERSION="526" -D_PANEL_E50A2V1_16BPP_-o .\obj\main.o --list_dir ".\\lst\\" --list --omf_browse .\obj\main.crf --depend .\obj\main.d)
+F (..\Application\GUI_X_FreeRTOS.c)(0x5CAB13A5)(-c --cpu ARM926EJ-S -g -O2 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I ..\..\..\Driver\Source -I ..\..\..\Driver\Include -I ..\..\..\ThirdParty\FATFS\src -I ..\..\..\ThirdParty\emWin\Config -I ..\..\..\ThirdParty\emWin\Include -I ..\..\FreeRTOS_with_emwin -I ..\tslib -I ..\Application -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\portable\RVDS\ARM9_N9H30 -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Demo\Common\include-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Toshiba-D__UVISION_VERSION="526" -D_PANEL_E50A2V1_16BPP_-o .\obj\gui_x_freertos.o --list_dir ".\\lst\\" --list --omf_browse .\obj\gui_x_freertos.crf --depend .\obj\gui_x_freertos.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599EDB3C)
+I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\FreeRTOS.h)(0x5C870DDC)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x599EDB3C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599EDB3E)
+I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CAC12FD)
+I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\projdefs.h)(0x5C870DDC)
+I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\portable.h)(0x5C870DDC)
+I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\deprecated_definitions.h)(0x5C870DDC)
+I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\portable\RVDS\ARM9_N9H30\portmacro.h)(0x5C870DDC)
+I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\mpu_wrappers.h)(0x5C870DDC)
+I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\semphr.h)(0x5C870DDC)
+I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\queue.h)(0x5C870DDC)
+I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\task.h)(0x5C870DDC)
+I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\list.h)(0x5C870DDC)
+I (..\..\..\ThirdParty\emWin\Include\GUI.h)(0x5C870DDD)
+I (..\..\..\ThirdParty\emWin\Include\GUI_ConfDefaults.h)(0x5C870DDD)
+I (..\..\..\ThirdParty\emWin\Config\GUIConf.h)(0x5C99E498)
+I (..\..\..\ThirdParty\emWin\Include\GUI_Type.h)(0x5C870DDD)
+I (..\..\..\ThirdParty\emWin\Include\LCD.h)(0x5C870DDD)
+I (..\..\..\ThirdParty\emWin\Include\Global.h)(0x5C870DDD)
+I (..\..\..\ThirdParty\emWin\Include\GUI_Version.h)(0x5C870DDD)
+F (..\Application\standalone.c)(0x5CAC0342)(-c --cpu ARM926EJ-S -g -O2 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I ..\..\..\Driver\Source -I ..\..\..\Driver\Include -I ..\..\..\ThirdParty\FATFS\src -I ..\..\..\ThirdParty\emWin\Config -I ..\..\..\ThirdParty\emWin\Include -I ..\..\FreeRTOS_with_emwin -I ..\tslib -I ..\Application -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\portable\RVDS\ARM9_N9H30 -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Demo\Common\include-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Toshiba-D__UVISION_VERSION="526" -D_PANEL_E50A2V1_16BPP_-o .\obj\standalone.o --list_dir ".\\lst\\" --list --omf_browse .\obj\standalone.crf --depend .\obj\standalone.d)
+F (..\Application\startup.s)(0x5CAB10FC)(--cpu ARM926EJ-S -g --apcs=interwork -IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Toshiba--pd "__UVISION_VERSION SETA 526"--list .\lst\startup.lst --xref -o .\obj\startup.o --depend .\obj\startup.d)
+F (..\main.c)(0x5CAC173F)(-c --cpu ARM926EJ-S -g -O2 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I ..\..\..\Driver\Source -I ..\..\..\Driver\Include -I ..\..\..\ThirdParty\FATFS\src -I ..\..\..\ThirdParty\emWin\Config -I ..\..\..\ThirdParty\emWin\Include -I ..\..\FreeRTOS_with_emwin -I ..\tslib -I ..\Application -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\portable\RVDS\ARM9_N9H30 -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include -I ..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Demo\Common\include-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Toshiba-D__UVISION_VERSION="526" -D_PANEL_E50A2V1_16BPP_-o .\obj\main.o --list_dir ".\\lst\\" --list --omf_browse .\obj\main.crf --depend .\obj\main.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599EDB3C)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599EDB3C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599EDB3C)
@@ -270,7 +294,7 @@ I (..\..\..\ThirdParty\emWin\Include\DIALOG_Intern.h)(0x5C870DDD)
 I (..\..\..\ThirdParty\emWin\Config\LCDconf.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\emWin\Include\text.h)(0x5C870DDD)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\FreeRTOS.h)(0x5C870DDC)
-I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CA16891)
+I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CAC12FD)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\projdefs.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\portable.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\deprecated_definitions.h)(0x5C870DDC)
@@ -283,7 +307,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599EDB3C)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\FreeRTOS.h)(0x5C870DDC)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x599EDB3C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599EDB3E)
-I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CA16891)
+I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CAC12FD)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\projdefs.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\portable.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\deprecated_definitions.h)(0x5C870DDC)
@@ -296,7 +320,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599EDB3C)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\FreeRTOS.h)(0x5C870DDC)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x599EDB3C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599EDB3E)
-I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CA16891)
+I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CAC12FD)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\projdefs.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\portable.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\deprecated_definitions.h)(0x5C870DDC)
@@ -311,7 +335,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599EDB3C)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\FreeRTOS.h)(0x5C870DDC)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x599EDB3C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599EDB3E)
-I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CA16891)
+I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CAC12FD)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\projdefs.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\portable.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\deprecated_definitions.h)(0x5C870DDC)
@@ -326,7 +350,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599EDB3C)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\FreeRTOS.h)(0x5C870DDC)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x599EDB3C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599EDB3E)
-I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CA16891)
+I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CAC12FD)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\projdefs.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\portable.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\deprecated_definitions.h)(0x5C870DDC)
@@ -342,7 +366,7 @@ F (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\croutine.c)(0x5C870DDC)(-c
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\FreeRTOS.h)(0x5C870DDC)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x599EDB3C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599EDB3E)
-I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CA16891)
+I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CAC12FD)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\projdefs.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\portable.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\deprecated_definitions.h)(0x5C870DDC)
@@ -356,7 +380,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599EDB3C)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\FreeRTOS.h)(0x5C870DDC)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x599EDB3C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599EDB3E)
-I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CA16891)
+I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CAC12FD)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\projdefs.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\portable.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\deprecated_definitions.h)(0x5C870DDC)
@@ -371,7 +395,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599EDB3C)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\FreeRTOS.h)(0x5C870DDC)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x599EDB3C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599EDB3E)
-I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CA16891)
+I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CAC12FD)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\projdefs.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\portable.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\deprecated_definitions.h)(0x5C870DDC)
@@ -386,7 +410,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599EDB3C)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\FreeRTOS.h)(0x5C870DDC)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x599EDB3C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599EDB3E)
-I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CA16891)
+I (..\..\FreeRTOS_with_emwin\FreeRTOSConfig.h)(0x5CAC12FD)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\projdefs.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\portable.h)(0x5C870DDC)
 I (..\..\..\ThirdParty\FreeRTOSV9.0.0\FreeRTOS\Source\include\deprecated_definitions.h)(0x5C870DDC)

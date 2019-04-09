@@ -1,0 +1,9 @@
+.\obj\guiconf.o: ..\..\..\ThirdParty\emWin\Config\GUIConf.c
+.\obj\guiconf.o: ..\..\..\ThirdParty\emWin\Include\GUI.h
+.\obj\guiconf.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\guiconf.o: ..\..\..\ThirdParty\emWin\Include\GUI_ConfDefaults.h
+.\obj\guiconf.o: ..\..\..\ThirdParty\emWin\Config\GUIConf.h
+.\obj\guiconf.o: ..\..\..\ThirdParty\emWin\Include\GUI_Type.h
+.\obj\guiconf.o: ..\..\..\ThirdParty\emWin\Include\LCD.h
+.\obj\guiconf.o: ..\..\..\ThirdParty\emWin\Include\Global.h
+.\obj\guiconf.o: ..\..\..\ThirdParty\emWin\Include\GUI_Version.h

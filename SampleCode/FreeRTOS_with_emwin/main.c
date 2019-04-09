@@ -149,6 +149,12 @@ void LCD_initial(void)
         while(1);
     }
 
+    if((UINT32)g_VAFrameBuf == BIT31)
+    {
+        sysprintf("Get buffer error !!\n");
+        while(1);
+    }
+
 #ifdef _PANEL_E50A2V1_16BPP_
     memset((void *)g_VAFrameBuf, 0, LCD_XSIZE*LCD_YSIZE*2);
 #endif
@@ -160,13 +166,13 @@ void LCD_initial(void)
     //vpostVAStartTrigger();
 }
 
-extern volatile int OS_TimeMS;
+//extern volatile int OS_TimeMS;
 volatile int g_enable_Touch;
 
-void TMR0_IRQHandler(void)
-{
-    OS_TimeMS++;
-}
+//void TMR0_IRQHandler(void)
+//{
+//    OS_TimeMS++;
+//}
 
 void TMR0_IRQHandler_TouchTask(void)
 {
@@ -383,9 +389,9 @@ void MainTask(void)
 {
     WM_HWIN hWin;
     char     acVersion[40] = "Framewin: Version of emWin: ";
-	static uint32_t cnt = 0;
+//	static uint32_t cnt = 0;
 
-//    GUI_Init();
+    GUI_Init();
     hWin = CreateFramewin();
     strcat(acVersion, GUI_GetVersionString());
     FRAMEWIN_SetText(hWin, acVersion);
@@ -393,8 +399,8 @@ void MainTask(void)
     while (1)
     {
 		//Below API both work
-//        GUI_Delay(500);
-		GUI_Exec();
+        GUI_Delay(100);
+//		GUI_Exec();
 
 //		sysprintf("MainTask:%d (%4d)\r\n" ,eTaskGetState(xTaskemWinHandle),cnt++);
 
@@ -426,13 +432,13 @@ void prvSetupHardware( void )
     g_enable_Touch = 0;
 #endif
 
-    OS_TimeMS = 0;
+//    OS_TimeMS = 0;
 
     SYS_Init();
 
     sysSetTimerReferenceClock(TIMER0, 12000000);
     sysStartTimer(TIMER0, 1000, PERIODIC_MODE);         /* 1000 ticks/per sec ==> 1tick/1ms */
-    sysSetTimerEvent(TIMER0,  1, (PVOID)TMR0_IRQHandler);           /*  1 tick  per call back */
+//    sysSetTimerEvent(TIMER0,  1, (PVOID)TMR0_IRQHandler);           /*  1 tick  per call back */
     sysSetTimerEvent(TIMER0, 10, (PVOID)TMR0_IRQHandler_TouchTask); /* 10 ticks per call back */
 
 #ifdef __USE_SD__
@@ -541,7 +547,7 @@ int main(void)
 {
 	prvSetupHardware();
 
-    xTaskCreate( vTaskemWin, "emWin", configMINIMAL_STACK_SIZE*32 , NULL, setMEDIUM_PRIORITY, &xTaskemWinHandle );
+    xTaskCreate( vTaskemWin, "emWin", configMINIMAL_STACK_SIZE*8 , NULL, setMEDIUM_PRIORITY, &xTaskemWinHandle );
     xTaskCreate( vTaskLogMsg1s, "LogMsg1s", configMINIMAL_STACK_SIZE , NULL, setMEDIUM_PRIORITY, &xTaskLogMsg1sHandle );
     xTaskCreate( vTaskLogMsg5s, "LogMsg5s", configMINIMAL_STACK_SIZE , NULL, setMEDIUM_PRIORITY, &xTaskLogMsg5sHandle );
     xTaskCreate( vTaskLogMsg500ms, "LogMsg500ms", configMINIMAL_STACK_SIZE , NULL, setMEDIUM_PRIORITY, NULL );
